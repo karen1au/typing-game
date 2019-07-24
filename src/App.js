@@ -14,6 +14,7 @@ function App() {
   const [words, setWords] = useState([]);
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [dark, setDark] = useState(false)
 
   useEffect(() => {
     axios
@@ -43,6 +44,11 @@ function App() {
     setGame(!gameStart);
   };
 
+  const darkHandler = event => {
+    setDark(event.target.checked)
+    console.log(event.target.checked)
+  }
+
   let button = null;
   if (gameDone) {
     button = <button onClick={resetGameHandler}>Restart</button>;
@@ -60,7 +66,7 @@ function App() {
       <div>
         <Timer />
         <WordsContext.Provider value={{ words, setWords }}>
-          <Words />
+          <Words dark={dark}/>
         </WordsContext.Provider>
         {button}
       </div>
@@ -79,6 +85,13 @@ function App() {
             <button className="start" onClick={gameHandler}>
               START
             </button>
+            <div className="dark-switch-box">
+            <span>go dark?</span>
+            <label className="switch">
+            <input type="checkbox" checked={dark} onChange={darkHandler}/>
+            <span className="slider"></span>
+            </label>
+            </div>
           </div>
         )}
       </GameContext.Provider>

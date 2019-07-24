@@ -22,6 +22,12 @@ const Words = props => {
     }
   };
 
+  let inputClass = "user-input";
+
+  if (props.dark) {
+    inputClass = "user-input-dark";
+  }
+
   return (
     <div className="word-container">
       {gameDone ? (
@@ -34,7 +40,7 @@ const Words = props => {
         <div>
           <h3>{words[0]}</h3>
           <input
-            className="user-input"
+            className={inputClass}
             type="text"
             value={userInput}
             onChange={userInputHandler}
