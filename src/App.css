@@ -67,13 +67,11 @@ button:hover {
   transform: translate(2px, 2px)
 }
 
-/* timer */
 .timer-container {
     margin: 10em auto 3em;
     font-family: var(--primary-font);
 }
 
-/* word and input */
 .word-container {
   font-family: var(--secondary-font);
   font-size: 1.5em;
@@ -94,6 +92,13 @@ button:hover {
 
 .score {
   font-family: var(--primary-font);
+}
+
+
+.err {
+  text-align: center;
+  font-family: var(--primary-font);
+  margin-top: 45vh
 }
 
 @media (max-width: 400px) {
