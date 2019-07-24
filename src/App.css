@@ -3,6 +3,8 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 :root {
@@ -10,12 +12,9 @@
   --secondary-font: 'Ubuntu Mono', monospace;
 }
 
+/* landing page */
 .welcome {
   margin: 10em auto;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
 }
 .welcome h1{
   font-family: var(--primary-font);
@@ -40,7 +39,7 @@ h3 {
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
-  to { width: 23.5% }
+  to { width: 100% }
 }
 
 /* The typewriter cursor effect */
@@ -52,6 +51,7 @@ h3 {
 button {
   font-family: var(--secondary-font);
   font-size: 1.5em;
+  padding: .2em .5em;
   background-color: transparent;
   border: 2px solid black;
   cursor: pointer;
@@ -65,4 +65,52 @@ button:focus {
 
 button:hover {
   transform: translate(2px, 2px)
+}
+
+/* timer */
+.timer-container {
+    margin: 10em auto 3em;
+    font-family: var(--primary-font);
+}
+
+/* word and input */
+.word-container {
+  font-family: var(--secondary-font);
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.user-input {
+  width: 15em;
+  padding: .5em;
+  font-size: .8em;
+  border: 1px solid black;
+  font-family: inherit;
+}
+
+.user-input:focus {
+  outline: none;
+}
+
+.score {
+  font-family: var(--primary-font);
+}
+
+@media (max-width: 400px) {
+
+  .welcome h1{
+    font-size: 3em;
+  }
+
+  .welcome-line {
+    font-size: 1em;
+  }
+
+  .timer-container h1 {
+    font-size: 1.8em;
+  }
+
+  .user-input {
+    max-width: 80vw;
+  }
 }

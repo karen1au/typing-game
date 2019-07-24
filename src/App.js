@@ -40,7 +40,7 @@ function App() {
     <div className="App">
       <GameContext.Provider value={{ gameDone, setGameDone }}>
         {gameStart ? (
-          <div>
+          <div className="game-container">
             <Timer />
             <WordsContext.Provider value={{ words, setWords }}>
               <Words />
