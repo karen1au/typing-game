@@ -54,8 +54,8 @@ function App() {
         ) : (
           <div className="welcome">
           <h1>Welcome</h1>
-          <h3>This is just a typical game</h3>
-          <button onClick={gameHandler}>START</button>
+          <h3 className="welcome-line">This is just a typical game</h3>
+          <button className="start" onClick={gameHandler}>START</button>
           </div>
         )}
       </GameContext.Provider>
