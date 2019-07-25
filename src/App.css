@@ -173,6 +173,9 @@ input:checked + .slider:before {
   margin: 1em auto;
   width: 3em;
   height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .spinner {
