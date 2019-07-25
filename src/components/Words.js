@@ -16,7 +16,7 @@ const Words = props => {
 
   useEffect(() => {
     axios
-      .get("https://random-word-api.herokuapp.com/word?key=XXLQCDBL&number=150")
+      .get("https://random-word-api.herokuapp.com/word?key=X34NERUF&number=150")
       .then(res => {
         setWords(res.data);
         setLoading(false);
