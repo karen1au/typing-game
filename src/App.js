@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://random-word-api.herokuapp.com/word?key=7ZQASGX2&number=150")
+      .get("https://random-word-api.herokuapp.com/word?key=TBTMN3MS&number=150")
       .then(res => {
         setWords(res.data);
         setLoading(false);
