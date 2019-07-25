@@ -3,7 +3,7 @@ import GameContext from "../game-context";
 import LoadingContext from "../loading-context";
 
 const Timer = props => {
-  const [currentTime, setTimer] = useState(3);
+  const [currentTime, setTimer] = useState(60);
 
   const { gameDone, setGameDone } = useContext(GameContext);
   const { loading, setLoading } = useContext(LoadingContext);
