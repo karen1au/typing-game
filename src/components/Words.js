@@ -1,14 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
 
 import GameContext from "../game-context";
-import WordsContext from "../words-context";
+import ErrContext from "../err-context";
+import LoadingContext from "../loading-context";
 
 const Words = props => {
   const [userInput, setUserInput] = useState("");
   const [score, setScore] = useState(0);
+  const [words, setWords] = useState([]);
 
   const { gameDone } = useContext(GameContext);
-  const { words, setWords } = useContext(WordsContext);
+  const { err, setErr } = useContext(ErrContext);
+  const { loading, setLoading } = useContext(LoadingContext);
+
+  useEffect(() => {
+    axios
+      .get("https://random-word-api.herokuapp.com/word?key=XXLQCDBL&number=150")
+      .then(res => {
+        setWords(res.data);
+        setLoading(false);
+      })
+      .catch(err => setErr(true));
+  }, [gameDone]);
 
   const userInputHandler = e => {
     setUserInput(e.target.value);
@@ -22,8 +36,19 @@ const Words = props => {
     }
   };
 
-  let inputClass = "user-input";
+  let word = null
+  if (loading) {
+    word = (<div className="word-box"><div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div></div>)
+    // word = <h3>loading...</h3>
+  } else {
+    word = (<div className="word-box"><h3>{words[0]}</h3></div>)
+  }
 
+  let inputClass = "user-input";
   if (props.dark) {
     inputClass = "user-input-dark";
   }
@@ -38,7 +63,7 @@ const Words = props => {
         </div>
       ) : (
         <div>
-          <h3>{words[0]}</h3>
+          {word}
           <input
             className={inputClass}
             type="text"

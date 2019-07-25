@@ -1,35 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-import axios from "axios";
 
 import Words from "./components/Words";
 import Timer from "./components/Timer";
 import GameContext from "./game-context";
-import WordsContext from "./words-context";
+import LoadingContext from "./loading-context";
+import ErrContext from "./err-context";
 
 function App() {
   const [gameStart, setGame] = useState(false);
   const [gameDone, setGameDone] = useState(false);
-  const [words, setWords] = useState([]);
-  const [err, setErr] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [dark, setDark] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get("https://random-word-api.herokuapp.com/word?key=TBTMN3MS&number=150")
-      .then(res => {
-        setWords(res.data);
-        setLoading(false);
-      })
-      .catch(err => setErr(true));
-  }, [gameDone]);
+
 
   //click start
   const gameHandler = () => {
     setGame(true);
     setGameDone(false);
+    setLoading(true);
   };
 
   //click stop
@@ -59,15 +51,13 @@ function App() {
   let content = null;
   if (err) {
     content = <h1 className="err">Please try again later...</h1>;
-  } else if (loading) {
-    content = <h1 className="err">Loading...</h1>;
   } else {
     content = (
       <div>
         <Timer />
-        <WordsContext.Provider value={{ words, setWords }}>
+        {/* <WordsContext.Provider value={{ words, setWords }}> */}
           <Words dark={dark}/>
-        </WordsContext.Provider>
+        {/* </WordsContext.Provider> */}
         {button}
       </div>
     );
@@ -75,6 +65,8 @@ function App() {
 
   return (
     <div className="App">
+      <LoadingContext.Provider value={{ loading, setLoading }}>
+      <ErrContext.Provider value={{ err, setErr }}>
       <GameContext.Provider value={{ gameDone, setGameDone }}>
         {gameStart ? (
           <div className="game-container">{content}</div>
@@ -95,6 +87,8 @@ function App() {
           </div>
         )}
       </GameContext.Provider>
+      </ErrContext.Provider>
+      </LoadingContext.Provider>
     </div>
   );
 }
