@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-
 import Words from "./components/Words";
 import Timer from "./components/Timer";
 import GameContext from "./game-context";
@@ -11,11 +10,10 @@ import ErrContext from "./err-context";
 function App() {
   const [gameStart, setGame] = useState(false);
   const [gameDone, setGameDone] = useState(false);
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(false);
+  const [reversed, setReverse] = useState(false);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(false);
-
-
 
   //click start
   const gameHandler = () => {
@@ -37,9 +35,12 @@ function App() {
   };
 
   const darkHandler = event => {
-    setDark(event.target.checked)
-    console.log(event.target.checked)
-  }
+    setDark(event.target.checked);
+  };
+
+  const reverseHandler = event => {
+    setReverse(event.target.checked);
+  };
 
   let button = null;
   if (gameDone) {
@@ -55,9 +56,7 @@ function App() {
     content = (
       <div>
         <Timer />
-        {/* <WordsContext.Provider value={{ words, setWords }}> */}
-          <Words dark={dark}/>
-        {/* </WordsContext.Provider> */}
+        <Words dark={dark} reversed={reversed} />
         {button}
       </div>
     );
@@ -66,28 +65,43 @@ function App() {
   return (
     <div className="App">
       <LoadingContext.Provider value={{ loading, setLoading }}>
-      <ErrContext.Provider value={{ err, setErr }}>
-      <GameContext.Provider value={{ gameDone, setGameDone }}>
-        {gameStart ? (
-          <div className="game-container">{content}</div>
-        ) : (
-          <div className="welcome">
-            <h1>Welcome</h1>
-            <h3 className="welcome-line">This is just a typical game</h3>
-            <button className="start" onClick={gameHandler}>
-              START
-            </button>
-            <div className="dark-switch-box">
-            <span>go dark?</span>
-            <label className="switch">
-            <input type="checkbox" checked={dark} onChange={darkHandler}/>
-            <span className="slider"></span>
-            </label>
-            </div>
-          </div>
-        )}
-      </GameContext.Provider>
-      </ErrContext.Provider>
+        <ErrContext.Provider value={{ err, setErr }}>
+          <GameContext.Provider value={{ gameDone, setGameDone }}>
+            {gameStart ? (
+              <div className="game-container">{content}</div>
+            ) : (
+              <div className="welcome">
+                <h1>Welcome</h1>
+                <h3 className="welcome-line">This is just a typical game</h3>
+                <button className="start" onClick={gameHandler}>
+                  START
+                </button>
+                <div className="switch-box">
+                  <span>go dark?</span>
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      checked={dark}
+                      onChange={darkHandler}
+                    />
+                    <span className="slider" />
+                  </label>
+                </div>
+                <div className="switch-box">
+                  <span>go reverse?</span>
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      checked={reversed}
+                      onChange={reverseHandler}
+                    />
+                    <span className="slider" />
+                  </label>
+                </div>
+              </div>
+            )}
+          </GameContext.Provider>
+        </ErrContext.Provider>
       </LoadingContext.Provider>
     </div>
   );

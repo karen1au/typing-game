@@ -108,14 +108,14 @@ button:hover {
   margin-top: 45vh
 }
 
-.dark-switch-box {
+.switch-box {
   margin-top: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.dark-switch-box span {
+.switch-box span {
   font-family: var(--secondary-font);
   font-weight: bold;
 }

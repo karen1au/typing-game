@@ -26,14 +26,23 @@ const Words = props => {
 
   const userInputHandler = e => {
     setUserInput(e.target.value);
-    //when user get the right word
-    if (e.target.value === words[0]) {
+    //normal mode
+    if (!props.reversed && e.target.value === words[0]) {
       setUserInput("");
       const newWord = [...words];
       newWord.shift();
       setWords(newWord);
       setScore(score + 1);
     }
+    //reversed mode
+    if (props.reversed && e.target.value.split("").reverse().join("") === words[0]) {
+      setUserInput("");
+      const newWord = [...words];
+      newWord.shift();
+      setWords(newWord);
+      setScore(score + 1);
+    }
+
   };
 
   let word = null
