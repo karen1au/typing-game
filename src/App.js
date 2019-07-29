@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import Words from "./components/Words";
@@ -15,6 +15,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(false);
 
+
+  console.log(process.env)
   //click start
   const gameHandler = () => {
     setGame(true);

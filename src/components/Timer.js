@@ -6,7 +6,7 @@ const Timer = props => {
   const [currentTime, setTimer] = useState(60);
 
   const { gameDone, setGameDone } = useContext(GameContext);
-  const { loading, setLoading } = useContext(LoadingContext);
+  const { loading } = useContext(LoadingContext);
   
   const timer = () => setTimer(currentTime - 1);
   
